@@ -1,6 +1,8 @@
 # MNIST Compact Accuracy Model 
 
+
 [![ML Pipeline](https://github.com/Vibhanshuray01/mnist-compact-accuracy/actions/workflows/ml-pipeline.yml/badge.svg)](https://github.com/Vibhanshuray01/mnist-compact-accuracy/actions/workflows/ml-pipeline.yml)
+
 
 This repository features a lightweight deep learning model for the MNIST dataset. The model is optimized to:  
 1. Use **fewer than 6300 parameters**.  
