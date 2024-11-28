@@ -7,17 +7,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v5
       with:
         python-version: '3.8'
     
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install torch torchvision pytest
+        pip install --index-url https://download.pytorch.org/whl/cpu torch torchvision --no-cache-dir
+        pip install pytest
     
     - name: Train model
       run: |
@@ -25,10 +26,11 @@ jobs:
     
     - name: Run tests
       run: |
-        pytest test_model.py -v
+        pytest -v -s test_model.py
     
     - name: Upload trained model
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: trained-model
-        path: mnist_model_*.pth 
+        path: mnist_model_*.pth
+        retention-days: 5
