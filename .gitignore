@@ -61,4 +61,7 @@ Thumbs.db
 runs/
 outputs/
 checkpoints/
-saved_models/ 
+saved_models/
+
+# Augmentation samples
+augmentation_samples/ 

@@ -18,7 +18,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install --index-url https://download.pytorch.org/whl/cpu torch torchvision --no-cache-dir
-        pip install pytest
+        pip install pytest matplotlib
     
     - name: Train model
       run: |
@@ -28,9 +28,11 @@ jobs:
       run: |
         pytest -v -s test_model.py
     
-    - name: Upload trained model
+    - name: Upload trained model and augmentation samples
       uses: actions/upload-artifact@v4
       with:
-        name: trained-model
-        path: mnist_model_*.pth
+        name: model-and-samples
+        path: |
+          mnist_model_*.pth
+          augmentation_samples/*.png
         retention-days: 5

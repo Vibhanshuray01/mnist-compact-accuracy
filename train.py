@@ -5,16 +5,14 @@ from torchvision import datasets, transforms
 from model import MNISTModel
 from datetime import datetime
 import os
+from augmentation import get_augmented_transforms, visualize_augmentations
 
 def train():
     # Set device
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     
     # Load MNIST dataset
-    transform = transforms.Compose([
-        transforms.ToTensor(),
-        transforms.Normalize((0.1307,), (0.3081,))
-    ])
+    transform = get_augmented_transforms()
     
     train_dataset = datasets.MNIST('./data', train=True, download=True, transform=transform)
     train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=64, shuffle=True)
@@ -50,6 +48,8 @@ def train():
     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
     save_path = f'mnist_model_{timestamp}.pth'
     torch.save(model.state_dict(), save_path)
+    
+    visualize_augmentations()
     
     return final_accuracy, save_path
 
